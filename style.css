@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  font-family: "Inter", sans-serif;
+  background-repeat: no-repeat;
+}
+
+.music-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  width: 350px;
+  background: rgba(255, 255, 255, 0.1);
+  height: 550px;
+  box-shadow: 0 40px 100px rgba(255, 255, 255, 0.002);
+  color: #d5eebb;
+  backdrop-filter: blur(23px);
+}
+
+.music-container .music-header {
+  text-align: center;
+}
+
+.music-header h1 {
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.music-header p {
+  font-size: 16px;
+}
+
+.music-disk {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 50%;
+  background-size: cover;
+  background-image: unset;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.1);
+  animation: rotatecircle 15s infinite linear;
+  animation-play-state: paused;
+  transition: 0.5s;
+}
+
+.music-disk.play {
+  animation-play-state: running;
+}
+
+.music-disk::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  height: 15%;
+}
+
+.duration-controller {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.duration-controller > input {
+  width: 100%;
+  -webkit-appearance: none;
+  border-radius: 15px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+}
+
+.duration-controller > input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 20px;
+  border-radius: 100%;
+  background: black;
+  box-shadow: -400px 0 0 400px #d5eebb;
+}
+
+.duration-controller > span {
+  font-size: 15px;
+}
+
+span.total-duration {
+  position: absolute;
+  left: 0;
+  bottom: -250%;
+}
+
+span.start-duration {
+  position: absolute;
+  text-align: center;
+  right: 0;
+  bottom: -250%;
+}
+
+.controller-container {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+}
+
+.controller-container button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  background-color: #d5eebb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.controller-container img {
+  display: block;
+  width: 50%;
+  color: #020024;
+}
+
+.controller-container .start {
+  transform: scale(1.5);
+  position: relative;
+}
+
+.controller-container .start span {
+  width: 5px;
+  height: 22px;
+  background-color: #020024;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.5s;
+}
+
+.start.play span:first-child {
+  width: 35%;
+  left: 35%;
+  clip-path: polygon(0 0, 28% 0, 28% 100%, 0% 100%);
+}
+
+.start span:nth-child(2) {
+  left: 55%;
+  transform-origin: center;
+  transform: translateY(-50%) scaleY(0);
+  /* clip-path: polygon(0 0, 100% 49%, 100% 49%, 0% 100%); */
+}
+
+.start span:first-child {
+  width: 15px;
+  clip-path: polygon(0 0, 100% 49%, 100% 49%, 0% 100%);
+}
+
+.start.play span:nth-child(2) {
+  transform: translateY(-50%) scaleY(1);
+  left: 55%;
+  /* clip-path: polygon(0 0, 28% 0, 28% 100%, 0% 100%); */
+}
+
+.wave-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  gap: 6px;
+  padding-top: 1rem;
+}
+
+.wave-container span {
+  width: 8px;
+  height: 50px;
+  background-color: #d5eebb;
+  animation: pulse 1s infinite;
+  animation-play-state: paused;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.wave-container.play span {
+  animation-play-state: running;
+  opacity: 1;
+  visibility: visible;
+}
+
+.wave-container span:first-child {
+  animation-delay: 0.1s;
+}
+
+.wave-container span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.wave-container span:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+.wave-container span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.wave-container span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.wave-container span:nth-child(6) {
+  animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(0.8);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  75% {
+    transform: scaleY(1.2);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes rotatecircle {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
